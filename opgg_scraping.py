@@ -22,13 +22,28 @@ with open("bottom_tire_table.json", "r", encoding='utf-8') as b_json:
     # champion_name = b_result['results'][0] # test
     # print(champion_name)
     b_champion_names = list()
+    b_data = list()
     for el in b_result['results']:
         # print(el['champion__name'])
+        # print(el)
         champion_name = el['champion__name']
+        champion_name_en = el['champion__name_us']
+        op_tire = el['op_tier']
+        win_rate =el['win_rate']
+        pick_rate =el['pick_rate']
+        ban_rate = el['ban_rate']
+        lane_name = el['lane__lane_name_kr']
+        lane_id = el['lane__lane_id']
+        champion_id = el['champion__data_id']
         # ['champion__data_key']['champion__name_us']['lan__lane_id']
-        b_champion_names.append(champion_name)
-    print(b_champion_names)
-    print(len(b_champion_names))
+        ev = f"{champion_name}의 티어는 {op_tire}티어입니다. 승률({win_rate}) [라인:{lane_name}]"
+        ev2 = f"{champion_name}의 티어는 {op_tire}티어입니다. 승률({win_rate}) [라인:{lane_name}]"
+        # print(ev)
+        # b_champion_names.append(champion_name)
+        b_data.append(ev2)
+    # print(b_champion_names)
+    # print(len(b_champion_names))
+    print(b_data)
 # print([d.get('entrezgene') for d in site_json['hits'] if d.get('entrezgene')])
 
 # response =requests.get(url)
