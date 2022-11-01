@@ -1,14 +1,14 @@
 import json
 import pymysql
 db = pymysql.connect(host='localhost',
-                             user=username,
-                             password=password,
+                             user='username',
+                             password='password',
                              database='2022_DB_PROJECT',
                              port=3306,
                              cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 
-with open("bottom_tire_table.json", "r", encoding='utf-8') as b_json: # 여기서 JSON 파일만 바꿔가면서 해서 넣으면 됨
+with open("top_tire_table.json", "r", encoding='utf-8') as b_json: # 여기서 JSON 파일만 바꿔가면서 해서 넣으면 됨
     all_list_champion_result = json.load(b_json)
     data = list()
     # print(all_list_champion_result['results'])
@@ -21,9 +21,11 @@ with open("bottom_tire_table.json", "r", encoding='utf-8') as b_json: # 여기�
         ban_rate = el['ban_rate']
         pick_rate = el['pick_rate']
         tier = el['op_tier']
+        c_key_id = f"key:{champion_data_key}id:{line_id}"
         
-        sql=f'insert into champion_info(cham_key,line_id,win_rate,ban_rate,pick_rate,tier) values({champion_data_key},{line_id},"{win_rate}","{ban_rate}","{pick_rate}","{tier}")'
+        sql=f'insert into champion_info(cham_key,line_id,win_rate,ban_rate,pick_rate,tier,c_key_id) values({champion_data_key},{line_id},"{win_rate}","{ban_rate}","{pick_rate}","{tier}","{c_key_id}")'
         print(sql)
+        # print(c_key_id)
         cursor.execute(sql)
         res = cursor.fetchall()
     
